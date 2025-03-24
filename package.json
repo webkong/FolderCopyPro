@@ -1,0 +1,81 @@
+{
+  "name": "folder-sync-pro",
+  "displayName": "FolderSyncPro: Copy to Target Project",
+  "description": "Copy files or folders to a specified target project and commit to Git.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.copyToTarget",
+        "title": "复制到目标工程"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.copyToTarget",
+          "group": "navigation",
+          "when": "resourceLangId"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "FolderSyncPro Settings",
+      "properties": {
+        "copyToTarget.targets": {
+          "type": "array",
+          "default": [],
+          "description": "复制目标配置列表，每个配置包含目标地址、显示的 alias、复制模式和 Git 提交选项。",
+          "items": {
+            "type": "object",
+            "properties": {
+              "alias": {
+                "type": "string",
+                "description": "显示在右键菜单中的目标名称（可选）。"
+              },
+              "targetDirectory": {
+                "type": "string",
+                "description": "目标工程的绝对路径。"
+              },
+              "copyMode": {
+                "type": "string",
+                "enum": ["overwrite", "merge", "backup"],
+                "default": "overwrite",
+                "description": "复制模式：overwrite 表示覆盖，merge 表示合并（若目标存在则合并文件夹内容），backup 表示备份后复制。"
+              },
+              "git": {
+                "type": "object",
+                "properties": {
+                  "enable": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否在复制完成后自动执行 Git 提交操作。"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.0",
+    "@types/vscode": "^1.75.0",
+    "typescript": "^4.9.0",
+    "vsce": "^2.10.0"
+  }
+}
