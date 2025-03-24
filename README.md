@@ -1,71 +1,113 @@
-# foldersyncpro README
+# FolderCopyPro - VS Code 插件
 
-This is the README for your extension "foldersyncpro". After writing up a brief description, we recommend including the following sections.
+`FolderCopyPro` 是一个 VS Code 插件，允许您在资源管理器中右键点击文件或文件夹，将其快速复制到预定义的多个目标项目目录中，并支持 Git 提交操作。
 
-## Features
+## 功能特点
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+- 支持多个目标目录的配置，可自由选择复制到哪个目标
+- 支持三种复制模式：覆盖、合并、备份
+- 支持在目标项目中自动执行 Git 提交
+- 右键菜单动态展示配置的目标及其别名，操作快捷
 
 ---
 
-## Following extension guidelines
+## 安装
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+### 通过 VS Code Marketplace 安装
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+1. 打开 VS Code，按 `Ctrl + Shift + X` 打开扩展市场
+2. 在搜索框中输入插件名称 **"FolderCopyPro"** 并安装
 
-## Working with Markdown
+### 通过 VSIX 文件安装
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+1. 前往 [GitHub 仓库](https://github.com/webkong/FolderCopyPro) 或 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=your-publisher-name.copy-to-target) 下载 `.vsix` 文件
+2. 在 VS Code 中按 `Ctrl + Shift + P`，输入 **"Install from VSIX"**
+3.
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+---
 
-## For more information
+## 配置方法
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+在 VS Code 的 `settings.json` 中添加如下配置：
 
-**Enjoy!**
+```json
+"copyToTarget.targets": [
+  {
+    "alias": "项目 A",
+    "targetDirectory": "/path/to/projectA",
+    "copyMode": "overwrite",
+    "git": { "enable": true }
+  },
+  {
+    "alias": "项目 B",
+    "targetDirectory": "/path/to/projectB",
+    "copyMode": "merge",
+    "git": { "enable": false }
+  },
+  {
+    "alias": "项目 C",
+    "targetDirectory": "/path/to/projectC",
+    "copyMode": "backup",
+    "git": { "enable": true }
+  }
+]
+```
+
+### 配置参数说明
+
+| 配置项            | 类型      | 说明                                           |
+| ----------------- | --------- | ---------------------------------------------- |
+| `alias`           | `string`  | 目标目录的别名，右键菜单显示用                 |
+| `targetDirectory` | `string`  | 目标项目的绝对路径                             |
+| `copyMode`        | `string`  | 复制模式，可选：`overwrite`、`merge`、`backup` |
+| `git.enable`      | `boolean` | 是否在目标项目中执行 Git 提交                  |
+
+---
+
+## 使用方法
+
+1. 在资源管理器中右键选中要复制的文件或文件夹
+2. 选择 **"复制到目标目录"** 菜单
+3. 从弹出的目标列表中选择目标项目
+4. 根据配置执行文件复制和 Git 提交操作
+
+---
+
+## 复制模式说明
+
+- **overwrite**：直接覆盖目标文件或文件夹
+- **merge**：合并文件夹，仅覆盖冲突的文件
+- **backup**：备份目标目录中原有文件，再复制新的文件
+
+---
+
+## 示例场景
+
+- 在多个项目中同步代码片段或资源文件
+- 快速更新多个项目的公共配置或组件
+- 批量将开发代码同步至测试或生产环境
+
+---
+
+## 注意事项
+
+- 确保目标目录路径正确且有写权限
+- Git 提交功能依赖目标项目中存在有效的 Git 仓库
+- 如果选择 **overwrite** 或 **merge** 复制模式，请谨慎操作，避免覆盖误删
+
+---
+
+## 贡献和反馈
+
+如果有问题或建议，欢迎提交 Issue 或 Pull Request！  
+GitHub 地址：[Your Repository URL](https://github.com/webkong/FolderCopyPro)
+
+---
+
+## 许可证
+
+MIT License
+
+---
+
+希望这个 README 文件能帮助用户快速理解插件的功能和配置方式。如果有需要调整或补充的地方，请随时反馈！ 😊

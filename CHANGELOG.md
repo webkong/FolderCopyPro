@@ -1,9 +1,41 @@
-# Change Log
+# Change Log - FolderCopyPro
 
-All notable changes to the "foldersyncpro" extension will be documented in this file.
+## [1.1.0] - 2025-03-24
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### 新增
 
-## [Unreleased]
+- 支持多个目标目录的配置，右键菜单中根据配置的 `alias` 动态显示目标目录。
+- 复制模式支持 **覆盖（overwrite）**、**合并（merge）**、**备份（backup）**，更灵活的文件操作。
+- 支持目标项目的 Git 提交操作，支持开启/关闭提交的配置。
 
-- Initial release
+### 优化
+
+- 优化配置读取和错误提示，提高插件的稳定性。
+- 改善代码结构，提升易读性和可维护性。
+
+---
+
+## [1.0.0] - 2025-03-20
+
+### 初始版本
+
+- 实现基本功能：在 VS Code 资源管理器中右键选择文件或文件夹，复制到目标项目目录中。
+- 支持 Git 提交的简单操作。
+
+---
+
+## 未来计划
+
+- 支持 Git 提交信息自定义，包含提交备注和用户信息。
+- 增加更多的复制策略和错误处理机制。
+- 支持目标目录的动态添加和编辑。
+
+---
+
+## 备注
+
+- 如果你有任何建议或遇到问题，请在 [GitHub Issues](https://github.com/webkong/FolderCopyPro/issues) 中反馈。
+
+---
+
+请确保在发布每个版本前同步更新 `CHANGELOG.md`，以便用户了解最新功能和修复情况！ 🚀
