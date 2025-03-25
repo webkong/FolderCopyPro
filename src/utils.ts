@@ -10,7 +10,8 @@ import * as vscode from 'vscode';
  * @param copyMode 复制模式：overwrite、merge、backup
  * @param gitEnable 是否执行 Git 提交
  */
-export async function copyToTargetAndCommit(sourcePath: string, targetDir: string, copyMode: string, gitEnable: boolean) {
+export async function copyToTargetAndCommit(sourcePath: string, targetDir: string, copyMode: string, gitEnable: boolean, gitDir: string) {
+  console.log('🚀 ~ copyToTargetAndCommit ~ sourcePath: string, targetDir: string, copyMode: string, gitEnable: boolean, gitDir: string:', sourcePath, targetDir, copyMode, gitEnable, gitDir)
   if (!fs.existsSync(sourcePath)) {
     throw new Error('源路径无效');
   }
@@ -46,8 +47,8 @@ export async function copyToTargetAndCommit(sourcePath: string, targetDir: strin
 
   // 根据配置执行 Git 提交操作
   if (gitEnable) {
-    if (isGitRepository(targetDir)) {
-      await gitCommit(targetDir, path.basename(sourcePath));
+    if (isGitRepository(gitDir)) {
+      await gitCommit(gitDir, path.basename(sourcePath));
     } else {
       throw new Error('目标路径不是 Git 仓库');
     }
@@ -111,7 +112,7 @@ function isGitRepository(dir: string): boolean {
 async function gitCommit(dir: string, fileName: string) {
   try {
     child_process.execSync(`git add .`, { cwd: dir });
-    child_process.execSync(`git commit -m "复制 ${fileName} 并提交"`, { cwd: dir });
+    child_process.execSync(`git commit -m "feat: FolderCopyPro: 复制 ${fileName} 并自动提交"`, { cwd: dir });
     child_process.execSync(`git push`, { cwd: dir });
   } catch (error) {
     vscode.window.showErrorMessage(`Git 提交失败: ${error}`);

@@ -2,14 +2,14 @@ import * as vscode from 'vscode';
 import { copyToTargetAndCommit } from './utils';
 
 export function activate(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerCommand('extension.copyToTarget', async (uri: vscode.Uri) => {
+  const disposable = vscode.commands.registerCommand('extension.FolderCopyPro', async (uri: vscode.Uri) => {
     if (!uri || !uri.fsPath) {
       vscode.window.showErrorMessage('请选择一个有效的文件或文件夹');
       return;
     }
     
     // 从用户设置中读取多个目标配置
-    const config = vscode.workspace.getConfiguration('copyToTarget');
+    const config = vscode.workspace.getConfiguration('FolderCopyPro');
     const targets: any[] = config.get('targets', []);
 
     if (!targets || targets.length === 0) {
@@ -36,9 +36,11 @@ export function activate(context: vscode.ExtensionContext) {
     const targetDir: string = selectedTarget.targetDirectory;
     const copyMode: string = selectedTarget.copyMode || 'overwrite';
     const gitEnable: boolean = selectedTarget.git && selectedTarget.git.enable !== undefined ? selectedTarget.git.enable : true;
+    const gitDir: string = selectedTarget.git && selectedTarget.git.dir ? selectedTarget.git.dir : '';
+    console.log('🚀 ~ disposable ~ gitDir:', gitDir)
     
     try {
-      await copyToTargetAndCommit(uri.fsPath, targetDir, copyMode, gitEnable);
+      await copyToTargetAndCommit(uri.fsPath, targetDir, copyMode, gitEnable, gitDir);
       vscode.window.showInformationMessage(`成功复制到 ${targetDir} 并${gitEnable ? '提交 Git' : '完成操作'}！`);
     } catch (error: any) {
       vscode.window.showErrorMessage(`操作失败: ${error.message || error}`);

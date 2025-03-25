@@ -1,8 +1,8 @@
 {
   "name": "folder-copy-pro",
-  "displayName": "FolderCopyPro: Copy to Target Project",
+  "displayName": "Folder&Files Copy Pro",
   "description": "Copy files or folders to a specified target project and commit to Git.",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -15,14 +15,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.copyToTarget",
-        "title": "复制到目标工程"
+        "command": "extension.FolderCopyPro",
+        "title": "FolderCopyPro:复制到目标工程"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "extension.copyToTarget",
+          "command": "extension.FolderCopyPro",
           "group": "navigation",
           "when": "resourceLangId"
         }
@@ -32,7 +32,7 @@
       "type": "object",
       "title": "FolderCopyPro Settings",
       "properties": {
-        "copyToTarget.targets": {
+        "FolderCopyPro.targets": {
           "type": "array",
           "default": [],
           "description": "复制目标配置列表，每个配置包含目标地址、显示的 alias、复制模式和 Git 提交选项。",
@@ -64,6 +64,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否在复制完成后自动执行 Git 提交操作。"
+                  },
+                  "dir": {
+                    "type": "string",
+                    "default": false,
+                    "description": "Git 仓库目录, 用于执行git命令"
                   }
                 }
               }

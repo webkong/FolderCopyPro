@@ -61,6 +61,7 @@
 | `targetDirectory` | `string`  | 目标项目的绝对路径                             |
 | `copyMode`        | `string`  | 复制模式，可选：`overwrite`、`merge`、`backup` |
 | `git.enable`      | `boolean` | 是否在目标项目中执行 Git 提交                  |
+| `git.dir`      | `string` | Git命令执行的目录                 |
 
 ---
 
