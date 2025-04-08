@@ -2,7 +2,7 @@
   "name": "folder-copy-pro",
   "displayName": "Folder&Files Copy Pro",
   "description": "Copy files or folders to a specified target project and commit to Git.",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -16,7 +16,7 @@
     "commands": [
       {
         "command": "extension.FolderCopyPro",
-        "title": "FolderCopyPro:复制到目标工程"
+        "title": "FolderCopyPro: Copy to target project"
       }
     ],
     "menus": {
